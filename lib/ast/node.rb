@@ -223,6 +223,18 @@ module AST
       sexp
     end
 
+    # Converts `self` to JSON.
+    # It should be useful for non-Ruby consumers.
+    #
+    # @param  [Hash] state options for JSON::Ext::Generator::State
+    # @return [String]
+    #
+    # @note To use this you will need to `require` and depend on a JSON library,
+    #   it is not pulled in automatically
+    def to_json(state={})
+      {"type" => type, "children" => children}.to_json(state)
+    end
+
     # @return [AST::Node] self
     def to_ast
       self

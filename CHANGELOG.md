@@ -1,9 +1,10 @@
 Changelog
 =========
 
-v2.x.x (2017-12-xx)
+v2.3.1 (2017-12-xx)
 -------------------
 
+* Added AST::Node#to_json.
 * Made AST::Node#to_a an alias to speed it up. (#17)
 
 v2.3.0 (2016-06-07)

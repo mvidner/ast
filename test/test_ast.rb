@@ -71,6 +71,14 @@ describe AST::Node do
     ]).to_s.should.equal "(a :sym\n  (b\n    (node 0 1)\n    (node 0 1)))"
   end
 
+  it 'should format to_json correctly' do
+    AST::Node.new(:a, [ :sym, [ 1, 2 ] ]).to_json.should.equal '{"type":"a","children":["sym",[1,2]]}'
+    AST::Node.new(:a, [ :sym, @node ]).to_json.should.equal    '{"type":"a","children":["sym",{"type":"node","children":[0,1]}]}'
+    AST::Node.new(:a, [ :sym,
+      AST::Node.new(:b, [ @node, @node ])
+    ]).to_json.should.equal '{"type":"a","children":["sym",{"type":"b","children":[{"type":"node","children":[0,1]},{"type":"node","children":[0,1]}]}]}'
+  end
+
   it 'should format inspect correctly' do
     AST::Node.new(:a, [ :sym, [ 1, 2 ] ]).inspect.should.equal "s(:a, :sym, [1, 2])"
     AST::Node.new(:a, [ :sym,
